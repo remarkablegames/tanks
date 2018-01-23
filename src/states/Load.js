@@ -1,6 +1,7 @@
 import { State } from 'phaser';
 import { Enemy, Player } from '../sprites';
 import { Bullet } from '../weapons';
+import Main from './Main';
 
 export default class Load extends State {
   static key = 'load';
@@ -12,6 +13,10 @@ export default class Load extends State {
     this.addBitmapData('rect', [25, 25], '#ff0400', Enemy.key);
     // bullet
     this.addBitmapData('arc', [15, 15, 5], '#fff', Bullet.key);
+  }
+
+  create() {
+    this.state.start(Main.key);
   }
 
   /**
