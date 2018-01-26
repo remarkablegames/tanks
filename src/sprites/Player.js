@@ -1,5 +1,6 @@
 import { Sprite } from 'phaser';
 import { Bullet } from '../weapons';
+import { groups } from '../shared';
 
 const key = 'player';
 
@@ -32,5 +33,40 @@ export default class Player extends Sprite {
     // Create weapon that tracks player.
     this.weapon = new Bullet(game);
     this.weapon.trackSprite(this, 0, 0);
+  }
+
+  hitEnemy(bullet, enemy) {
+    bullet.kill();
+    enemy.kill();
+  }
+
+  update() {
+    const { body, game, cursors } = this;
+
+    // Reset the player velocity (movement).
+    body.velocity.x = 0;
+    body.velocity.y = 0;
+
+    // Move the player when cursor is down.
+    if (cursors.up.isDown) {
+      body.velocity.y = -150;
+    } else if (cursors.right.isDown) {
+      body.velocity.x = 150;
+    } else if (cursors.down.isDown) {
+      body.velocity.y = 150;
+    } else if (cursors.left.isDown) {
+      body.velocity.x = -150;
+    }
+
+    // Fire bullet when left mouse button is pressed.
+    if (game.input.activePointer.isDown) {
+      this.weapon.fireAtPointer();
+    }
+
+    game.physics.arcade.overlap(
+      this.weapon.bullets,
+      groups.enemies,
+      this.hitEnemy
+    );
   }
 }
