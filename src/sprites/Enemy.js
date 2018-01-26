@@ -1,5 +1,5 @@
 import { Sprite } from 'phaser';
-import { groups } from '../shared';
+import { groups, sprites } from '../shared';
 
 const key = 'enemy';
 
@@ -28,5 +28,16 @@ export default class Enemy extends Sprite {
 
     // The player should be bound to the world.
     this.body.collideWorldBounds = true;
+  }
+
+  update() {
+    const { body } = this;
+
+    // Enemy should collide against player.
+    this.game.physics.arcade.collide(this, sprites.player);
+
+    // Reset velocity so collision does not make the sprite move indefinitely.
+    body.velocity.x = 0;
+    body.velocity.y = 0;
   }
 }
