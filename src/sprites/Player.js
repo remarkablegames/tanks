@@ -2,10 +2,9 @@ import { Sprite } from 'phaser';
 import { Bullet } from '../weapons';
 import { groups } from '../shared';
 
-const key = 'player';
-
 export default class Player extends Sprite {
-  static key = key;
+  /** @const {String} */
+  static key = 'player';
 
   /**
    * @param {Phaser.Game} game
@@ -13,7 +12,7 @@ export default class Player extends Sprite {
    * @param {Number}      y
    */
   constructor(game, x, y) {
-    super(game, x, y, game.cache.getBitmapData(key));
+    super(game, x, y, game.cache.getBitmapData(Player.key));
 
     // Add sprite to the game.
     game.add.existing(this);
