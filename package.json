@@ -14,7 +14,7 @@
     "release": "standard-version --no-verify",
     "start": "node scripts/start"
   },
-  "homepage": "https://remarkablegames.github.io/tanks/",
+  "homepage": "https://remarkablegames.org/tanks/",
   "repository": {
     "type": "git",
     "url": "https://github.com/remarkablegames/tanks"
@@ -22,13 +22,6 @@
   "bugs": {
     "url": "https://github.com/remarkablegames/tanks/issues"
   },
-  "keywords": [
-    "tanks",
-    "2d",
-    "arcade",
-    "game",
-    "phaser"
-  ],
   "devDependencies": {
     "@commitlint/cli": "5.2.8",
     "@commitlint/config-conventional": "5.2.3",
