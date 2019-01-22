@@ -12,6 +12,8 @@ const config = {
   width: 800,
   height: 600,
   title: 'Tanks',
+  url: process.env.HOMEPAGE,
+  version: process.env.VERSION,
   scene: [Boot, Main],
   physics: {
     default: 'arcade',
