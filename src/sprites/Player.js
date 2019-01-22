@@ -1,46 +1,27 @@
-import { Sprite } from 'phaser';
-import { Bullet } from '../weapons';
-import { groups } from '../shared';
+import { GameObjects } from 'phaser';
 
-export default class Player extends Sprite {
+export default class Player extends GameObjects.Sprite {
   /** @const {String} */
   static key = 'player';
 
-  /**
-   * @param {Phaser.Game} game
-   * @param {Number}      x
-   * @param {Number}      y
-   */
-  constructor(game, x, y) {
-    super(game, x, y, game.cache.getBitmapData(Player.key));
+  constructor(scene, x, y, texture, frame) {
+    super(scene, x, y, Player.key);
 
-    // Add sprite to the game.
-    game.add.existing(this);
-
-    // Set sprite anchor to center.
-    this.anchor.setTo(0.5);
+    // Add sprite to the scene.
+    scene.add.existing(this);
 
     // Enable physics for sprite.
-    game.physics.arcade.enable(this);
+    scene.physics.world.enable(this);
 
     // The player should be bound to the world.
     this.body.collideWorldBounds = true;
 
     // Create cursor keys for movement.
-    this.cursors = game.input.keyboard.createCursorKeys();
-
-    // Create weapon that tracks player.
-    this.weapon = new Bullet(game);
-    this.weapon.trackSprite(this, 0, 0);
-  }
-
-  hitEnemy(bullet, enemy) {
-    bullet.kill();
-    enemy.kill();
+    this.cursors = scene.input.keyboard.createCursorKeys();
   }
 
   update() {
-    const { body, game, cursors } = this;
+    const { body, cursors } = this;
 
     // Reset the player velocity (movement).
     body.velocity.x = 0;
@@ -56,16 +37,5 @@ export default class Player extends Sprite {
     } else if (cursors.left.isDown) {
       body.velocity.x = -150;
     }
-
-    // Fire bullet when left mouse button is pressed.
-    if (game.input.activePointer.isDown) {
-      this.weapon.fireAtPointer();
-    }
-
-    game.physics.arcade.overlap(
-      this.weapon.bullets,
-      groups.enemies,
-      this.hitEnemy
-    );
   }
 }

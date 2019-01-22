@@ -1,26 +1,60 @@
-import { Physics, State } from 'phaser';
-import { Enemy, Player } from '../sprites';
+import { Scene } from 'phaser';
+import { Bullet, Enemy, Player } from '../sprites';
 import { groups, sprites } from '../shared';
 
-export default class Main extends State {
+const FIRE_DELAY = 400;
+const BULLET_SPEED = 500;
+
+export default class Main extends Scene {
   static key = 'main';
 
+  constructor() {
+    super({ key: Main.key });
+  }
+
   create() {
-    const { game } = this;
-
-    // Set the background color of the stage.
-    this.stage.backgroundColor = '#121215';
-
-    // We're going to be using physics, so enable the Arcade Physics system.
-    this.physics.startSystem(Physics.ARCADE);
+    const {
+      game: {
+        config: { height, width },
+      },
+    } = this;
 
     // The player and its settings.
-    sprites.player = new Player(game, 128, this.world.height / 2);
+    sprites.player = new Player(this, 128, height / 2);
 
     // Create enemies group.
     groups.enemies = this.add.group();
 
     // Create an enemy.
-    new Enemy(game, this.world.width - 128, this.world.height / 2);
+    new Enemy(this, width - 128, height / 2);
+
+    // Create bullets group.
+    groups.bullets = this.physics.add.group({
+      classType: Bullet,
+      runChildUpdate: true,
+    });
+
+    this.lastFired = 0;
+  }
+
+  update(time, delta) {
+    sprites.player.update();
+
+    groups.enemies.children.each(enemy => enemy.update());
+
+    // Fire bullet when left mouse button is pressed.
+    if (this.input.activePointer.isDown && time > this.lastFired) {
+      const bullet = groups.bullets
+        .get(sprites.player.x, sprites.player.y)
+        .init();
+
+      this.physics.moveTo(
+        bullet,
+        this.input.activePointer.x,
+        this.input.activePointer.y,
+        BULLET_SPEED
+      );
+      this.lastFired = time + FIRE_DELAY;
+    }
   }
 }
