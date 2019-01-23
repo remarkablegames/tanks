@@ -1,5 +1,4 @@
 import { GameObjects } from 'phaser';
-import { groups } from '../shared';
 
 const key = 'bullet';
 
@@ -29,14 +28,6 @@ export default class Bullet extends GameObjects.Sprite {
     this.body.velocity.y = 0;
   }
 
-  hitEnemy(bullet, enemy) {
-    if (!bullet.active || !enemy.active) {
-      return;
-    }
-    bullet.kill();
-    enemy.kill();
-  }
-
   update(time, delta) {
     const {
       scene: {
@@ -51,7 +42,5 @@ export default class Bullet extends GameObjects.Sprite {
       this.kill();
       return;
     }
-
-    this.scene.physics.world.overlap(this, groups.enemies, this.hitEnemy);
   }
 }

@@ -35,6 +35,21 @@ export default class Main extends Scene {
     });
 
     this.lastFired = 0;
+
+    // Check for overlap between bullet and enemy.
+    this.physics.add.overlap(
+      groups.bullets,
+      groups.enemies,
+      this.bulletEnemyOverlap
+    );
+  }
+
+  bulletEnemyOverlap(bullet, enemy) {
+    if (!bullet.active || !enemy.active) {
+      return;
+    }
+    bullet.kill();
+    enemy.kill();
   }
 
   update(time, delta) {
