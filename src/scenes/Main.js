@@ -1,15 +1,14 @@
 import { Scene } from 'phaser';
 import { Bullet, Enemy, Player } from '../sprites';
 import { groups, sprites } from '../shared';
+import { SCENES } from '../constants';
 
 const FIRE_DELAY = 400;
 const BULLET_SPEED = 500;
 
 export default class Main extends Scene {
-  static key = 'main';
-
   constructor() {
-    super({ key: Main.key });
+    super({ key: SCENES.MAIN });
   }
 
   create() {

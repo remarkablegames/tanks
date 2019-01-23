@@ -1,12 +1,10 @@
 import { GameObjects } from 'phaser';
 import { groups, sprites } from '../shared';
+import { TEXTURES } from '../constants';
 
 export default class Enemy extends GameObjects.Sprite {
-  /** @const {String} */
-  static key = 'enemy';
-
   constructor(scene, x, y, texture, frame) {
-    super(scene, x, y, Enemy.key);
+    super(scene, x, y, TEXTURES.ENEMY);
 
     // Add sprite to the scene.
     scene.add.existing(this);

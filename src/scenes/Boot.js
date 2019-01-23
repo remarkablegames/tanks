@@ -1,9 +1,10 @@
 import { Scene } from 'phaser';
-import { Bullet, Enemy, Player } from '../sprites';
-import Main from './Main';
+import { SCENES, TEXTURES } from '../constants';
 
 export default class Boot extends Scene {
-  static key = 'boot';
+  constructor() {
+    super({ key: SCENES.BOOT });
+  }
 
   preload() {
     // player
@@ -11,14 +12,14 @@ export default class Boot extends Scene {
       .graphics()
       .fillStyle(0x1ce2b2)
       .fillRect(0, 0, 25, 25)
-      .generateTexture(Player.key, 25, 25);
+      .generateTexture(TEXTURES.PLAYER, 25, 25);
 
     // enemy
     this.make
       .graphics()
       .fillStyle(0xff0400)
       .fillRect(0, 0, 25, 25)
-      .generateTexture(Enemy.key, 25, 25);
+      .generateTexture(TEXTURES.ENEMY, 25, 25);
 
     // bullet
     const bulletWidth = 15;
@@ -28,10 +29,10 @@ export default class Boot extends Scene {
       .graphics()
       .fillStyle(0xffffff)
       .fillCircle(bulletWidth / 2, bulletHeight / 2, bulletRadius)
-      .generateTexture(Bullet.key, bulletWidth, bulletHeight);
+      .generateTexture(TEXTURES.BULLET, bulletWidth, bulletHeight);
   }
 
   create() {
-    this.scene.start(Main.key);
+    this.scene.start(SCENES.MAIN);
   }
 }

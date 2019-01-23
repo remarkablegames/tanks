@@ -1,12 +1,9 @@
 import { GameObjects } from 'phaser';
-
-const key = 'bullet';
+import { TEXTURES } from '../constants';
 
 export default class Bullet extends GameObjects.Sprite {
-  static key = key;
-
   constructor(scene, x, y, texture, frame) {
-    super(scene, x, y, key);
+    super(scene, x, y, TEXTURES.BULLET);
 
     // Add sprite to the scene.
     scene.add.existing(this);

@@ -1,11 +1,9 @@
 import { GameObjects } from 'phaser';
+import { TEXTURES } from '../constants';
 
 export default class Player extends GameObjects.Sprite {
-  /** @const {String} */
-  static key = 'player';
-
   constructor(scene, x, y, texture, frame) {
-    super(scene, x, y, Player.key);
+    super(scene, x, y, TEXTURES.PLAYER);
 
     // Add sprite to the scene.
     scene.add.existing(this);
