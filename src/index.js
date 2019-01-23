@@ -1,5 +1,5 @@
 import './index.css';
-import { Boot, Main } from './states';
+import { Boot, Main } from './scenes';
 import Phaser from 'phaser';
 import registerServiceWorker from './registerServiceWorker';
 registerServiceWorker();
