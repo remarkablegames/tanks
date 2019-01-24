@@ -9,14 +9,11 @@ export default class Enemy extends GameObjects.Sprite {
     // Add sprite to the scene.
     scene.add.existing(this);
 
-    // Then add sprite to the group.
-    groups.enemies.add(this);
-
     // Enable physics for sprite.
     scene.physics.world.enable(this);
 
-    // The player should be bound to the world.
-    this.body.collideWorldBounds = true;
+    // Then add sprite to the group.
+    groups.enemies.add(this);
   }
 
   init() {
