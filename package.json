@@ -1,6 +1,6 @@
 {
   "name": "tanks",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Tanks is a classic 2D arcade game.",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
