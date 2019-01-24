@@ -41,6 +41,13 @@ export default class Main extends Scene {
       groups.enemies,
       this.bulletEnemyOverlap
     );
+
+    // Collide player with enemy.
+    this.physics.add.collider(
+      sprites.player,
+      groups.enemies,
+      this.playerEnemyCollide
+    );
   }
 
   bulletEnemyOverlap(bullet, enemy) {
@@ -51,10 +58,16 @@ export default class Main extends Scene {
     enemy.kill();
   }
 
+  playerEnemyCollide(player, enemy) {
+    if (!enemy.active || !player.active) {
+      return;
+    }
+    // Reset velocity so collision does not make the enemy move indefinitely.
+    enemy.body.setVelocity(0);
+  }
+
   update(time, delta) {
     sprites.player.update();
-
-    groups.enemies.children.each(enemy => enemy.update());
 
     // Fire bullet when left mouse button is pressed.
     if (this.input.activePointer.isDown && time > this.lastFired) {

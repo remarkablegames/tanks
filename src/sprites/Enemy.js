@@ -1,5 +1,5 @@
 import { GameObjects } from 'phaser';
-import { groups, sprites } from '../shared';
+import { groups } from '../shared';
 import { TEXTURES } from '../constants';
 
 export default class Enemy extends GameObjects.Sprite {
@@ -19,19 +19,15 @@ export default class Enemy extends GameObjects.Sprite {
     this.body.collideWorldBounds = true;
   }
 
-  kill() {
-    this.active = false;
-    this.visible = false;
+  init() {
+    this.setActive(true);
+    this.setVisible(true);
+    this.body.setEnable(true);
   }
 
-  update(time, delta) {
-    const { body } = this;
-
-    // Enemy should collide against player.
-    this.scene.physics.world.collide(this, sprites.player);
-
-    // Reset velocity so collision does not make the sprite move indefinitely.
-    body.velocity.x = 0;
-    body.velocity.y = 0;
+  kill() {
+    this.setActive(false);
+    this.setVisible(false);
+    this.body.setEnable(false);
   }
 }
