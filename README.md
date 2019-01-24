@@ -2,7 +2,9 @@
 
 A 2D arcade [tanks](<https://en.wikipedia.org/wiki/Tank_(video_game)>) game.
 
-[Demo](https://remarkablegames.org/tanks/)
+The web game is scaffolded from [phaser-template](https://github.com/remarkablegames/phaser-template).
+
+[Play game](https://remarkablegames.org/tanks/).
 
 ## Install
 
