@@ -1,6 +1,8 @@
 import { GameObjects } from 'phaser';
 import { TEXTURES } from '../constants';
 
+const PLAYER_SPEED = 150;
+
 export default class Player extends GameObjects.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene, x, y, TEXTURES.PLAYER);
@@ -12,7 +14,7 @@ export default class Player extends GameObjects.Sprite {
     scene.physics.world.enable(this);
 
     // The player should be bound to the world.
-    this.body.collideWorldBounds = true;
+    this.body.setCollideWorldBounds(true);
 
     // Create cursor keys for movement.
     this.cursors = scene.input.keyboard.createCursorKeys();
@@ -22,18 +24,22 @@ export default class Player extends GameObjects.Sprite {
     const { body, cursors } = this;
 
     // Reset the player velocity (movement).
-    body.velocity.x = 0;
-    body.velocity.y = 0;
+    body.setVelocity(0);
 
     // Move the player when cursor is down.
-    if (cursors.up.isDown) {
-      body.velocity.y = -150;
-    } else if (cursors.right.isDown) {
-      body.velocity.x = 150;
-    } else if (cursors.down.isDown) {
-      body.velocity.y = 150;
-    } else if (cursors.left.isDown) {
-      body.velocity.x = -150;
+    switch (true) {
+      case cursors.up.isDown:
+        body.setVelocityY(-PLAYER_SPEED);
+        break;
+      case cursors.right.isDown:
+        body.setVelocityX(PLAYER_SPEED);
+        break;
+      case cursors.down.isDown:
+        body.setVelocityY(PLAYER_SPEED);
+        break;
+      case cursors.left.isDown:
+        body.setVelocityX(-PLAYER_SPEED);
+        break;
     }
   }
 }
