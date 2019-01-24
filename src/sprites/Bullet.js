@@ -13,16 +13,17 @@ export default class Bullet extends GameObjects.Sprite {
   }
 
   init() {
-    this.active = true;
-    this.visible = true;
+    this.setActive(true);
+    this.setVisible(true);
+    this.body.setEnable(true);
     return this;
   }
 
   kill() {
-    this.active = false;
-    this.visible = false;
-    this.body.velocity.x = 0;
-    this.body.velocity.y = 0;
+    this.setActive(false);
+    this.setVisible(false);
+    this.body.setEnable(false);
+    this.body.setVelocity(0);
   }
 
   update(time, delta) {
@@ -37,7 +38,6 @@ export default class Bullet extends GameObjects.Sprite {
     // Out of bounds kill.
     if (this.x > width && this.y > height) {
       this.kill();
-      return;
     }
   }
 }
