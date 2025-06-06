@@ -18,11 +18,7 @@ cd tanks
 Install dependencies:
 
 ```sh
-# with npm
 npm install
-
-# with yarn
-yarn
 ```
 
 ## Run
@@ -30,11 +26,15 @@ yarn
 Run development server:
 
 ```sh
-# with npm
 npm start
+```
 
-# with yarn
-yarn start
+## Build
+
+Build production artifacts:
+
+```sh
+npm run build
 ```
 
 ## Deploy
@@ -42,11 +42,7 @@ yarn start
 Deploy to [GitHub Pages](https://pages.github.com/):
 
 ```sh
-# with npm
 npm run deploy
-
-# with yarn
-yarn deploy
 ```
 
 ## License
